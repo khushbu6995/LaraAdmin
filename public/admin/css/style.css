@@ -22826,5 +22826,10 @@ dl li {
 {
   font-size: 1.2rem !important;
 }
-
+.error
+{
+  list-style: none;
+color: red;
+font-size: 0.9rem;
+}
 /*# sourceMappingURL=maps/style.css.map */

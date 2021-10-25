@@ -1,5 +1,6 @@
 <?php
-use App\Http\Controllers\AdminController;
+
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
-Route::get('/index',[AdminController::class,'index']);
-Route::get('/usermanagement',[AdminController::class,'usermanagement']);
+Route::get('/login', [UserController::class, 'login']);
+Route::post('/login_check', [UserController::class, 'loginCheck']);
+Route::get('/register', [UserController::class, 'register']);
+Route::post('/registerCheck', [UserController::class, 'registerCheck']);
