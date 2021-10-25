@@ -19,21 +19,28 @@ class userController extends Controller
     {
         return view('admin.auth.login');
     }
+
+    /**
+     * @param email
+     * @param password
+     * check whether user exists in table or not if exists user going to login
+     * @author Khushbu Waghela
+     */
     public function loginCheck()
     {
-        // $attributes = request()->validate(
-        //     [
-        //         'email' => 'required|email',
-        //         'password' => 'required',
-        //     ]
-        // );
-        // if (auth()->attempt($attributes)) {
-        //     session()->regenerate();
-        //     return redirect('admin.dashboard.app')->with("success", "welcome Back");
-        // }
-        // throw validationException::withMessages([
-        //     'email' => "provided credentials could not be verified"
-        // ]);
+        $attributes = request()->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required',
+            ]
+        );
+        if (auth()->attempt($attributes)) {
+            session()->regenerate();
+            return redirect('admin.layout.app')->with("success", "welcome Back");
+        }
+        throw validationException::withMessages([
+            'email' => "provided credentials could not be verified"
+        ]);
     }
 
     /**

@@ -15,6 +15,13 @@
 @section('maincontent')
 <div class="col-lg-4 mx-auto">
   <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+  @if($errors->any())
+    <ul class="error">
+      @foreach($errors->all() as $error)
+      <li> {{$error}}</li>
+      @endforeach
+    </ul>
+    @endif
     <div class="brand-logo">
       <img src="{{asset('admin/images/logo-dark.svg')}}" alt="logo">
     </div>
