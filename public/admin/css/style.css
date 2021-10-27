@@ -22833,3 +22833,30 @@ color: red;
 font-size: 0.9rem;
 }
 /*# sourceMappingURL=maps/style.css.map */
+.icon-style
+{
+text-decoration: none;
+color: blue;
+font-size: 1rem;
+margin-right: 0.3rem;
+margin-left: 0.3rem;
+}
+.icon-edit-style
+{
+  color: black;
+}
+.icon-delete-style
+{
+  color: red;
+}
+.icon-view-style
+{
+  color: blue;
+}
+.pagignator-style
+{
+float: right;
+margin-top: 1.3rem;
+margin-right: 1.2rem;
+}
+
