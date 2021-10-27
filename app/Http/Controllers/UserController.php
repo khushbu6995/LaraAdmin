@@ -73,7 +73,7 @@ class userController extends Controller
 
         //function calling
         $reg->insertRecord($username, $email, $password);
-        return view('admin.auth.login');
+        return redirect('/login');
     }
 
     /**

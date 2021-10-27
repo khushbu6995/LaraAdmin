@@ -27,7 +27,7 @@ class Registration
         {
             $messages = "Email already exists";
             // return redirect(view('admin.auth.register'))->withInput()->withErrors($messages);
-            return redirect(view('admin.auth.register'))->withInput()->withErrors($messages);
+            // return redirect(view('admin.auth.register'))->withInput()->withErrors($messages);
         }
         $user->name=$username;
         $user->email=$email;

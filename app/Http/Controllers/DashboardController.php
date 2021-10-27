@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\App;
 use App\Services\Registration;
 use App\Services\UserManagement;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -48,7 +49,7 @@ class DashboardController extends Controller
     {
         $username = $request->username;
         $email = $request->email;
-        $password = bcrypt($request->password);
+        $password = Hash::make($request->password);
 
         //share parameter with services/UserManagement.php class
         $reg = App::makeWith(UserManagement::class, ['username' => $username, 'email' => $email, 'password' => $password]);

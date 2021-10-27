@@ -1,5 +1,5 @@
 @extends('admin.layouts.auth')
-@section('pageTitle','LaraAdmin | Login')
+@section('pageTitle','LaraAdmin | Forgot Password')
 @section('cssload')
 <link rel="stylesheet" href="{{asset('admin/vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{asset('admin/vendors/feather/feather.css')}}">
