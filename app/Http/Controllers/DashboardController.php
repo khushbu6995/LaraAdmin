@@ -28,7 +28,7 @@ class DashboardController extends Controller
      */
     public function userManagement()
     {
-        $users=User::simplePaginate(5);
+        $users=User::orderBy('name')->simplePaginate(5);
         return view('admin.user.usermanagement',compact('users'));
     }
 
