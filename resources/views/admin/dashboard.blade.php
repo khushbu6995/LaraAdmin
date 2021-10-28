@@ -16,13 +16,60 @@
   <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
+  <link rel="stylesheet" href="{{ asset('admin/css/clock.css') }}">
   @endsection
   @section('mainContent')
-  <div class="row">
-            <div class="col-sm-12 mb-4 mb-xl-0">
-              <h4 class="font-weight-bold text-dark">Hi, welcome back!</h4>
-            </div>
+
+
+  
+ <div class="row">
+  <div class="col-xl-12 d-flex grid-margin stretch-card">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title float-left">Latest Users List</h4>
+          
+          <div class="table-responsive pt-3">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    #
+                  </th>
+                  <th>
+                    User Name
+                  </th>
+                  
+
+                </tr>
+              </thead>
+              <tbody>
+                @php($i=0)
+                @foreach($users as $key => $user)
+                @php($i++)
+                <tr>
+                  <td>
+                    {{$i}}
+                  </td>
+                  <td>
+                    {{$user->name}}
+                  </td>
+                  
+                </tr>
+                @endforeach
+
+              </tbody>
+            </table>
           </div>
+        
+        </div>
+
+      </div>
+
+</div>
+    </div>
+  </div>
+
   @endsection
   @section('jsload')
     <!-- base:js -->
@@ -41,5 +88,6 @@
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
   <script src="{{ asset('admin/js/dashboard.js') }}"></script>
+  <script src="{{ asset('admin/js/clock.js') }}"></script>
   <!-- End custom js for this page-->
   @endsection

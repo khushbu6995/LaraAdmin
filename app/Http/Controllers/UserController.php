@@ -38,8 +38,8 @@ class userController extends Controller
         );
         $email=request('email');
         if (auth()->attempt($attributes)) {
-            session()->regenerate();
-            // session::put('email',$email);
+          
+            request()->session()->put('email',$email);
             return redirect('/dashboard')->with("success", "welcome Back");
         }
         throw validationException::withMessages([
@@ -67,12 +67,18 @@ class userController extends Controller
         $username = $request->username;
         $email = $request->email;
         $password = bcrypt($request->password);
+        $phone = $request->phone;
+        $address = $request->address;
+        $filename = $request->file('file')->getClientOriginalName();
+        $filepath = $request->file('file')->storeAs('file','public/admin/profile_image/');
+        $file=$filepath."/".$filename;
+
 
         //share parameter with services/registration.php class
-        $reg = App::makeWith(Registration::class, ['username' => $username, 'email' => $email, 'password' => $password]);
+        $reg = App::makeWith(Registration::class, ['username' => $username, 'email' => $email, 'password' => $password, 'phone' => $phone, 'address' => $address,'image'=>$file]);
 
         //function calling
-        $reg->insertRecord($username, $email, $password);
+        $reg->insertRecord($username, $email, $password,$phone, $address,$file);
         return redirect('/login');
     }
 
@@ -136,7 +142,7 @@ class userController extends Controller
             $reg = App::make(Registration::class);
             $reg->resetPassword($email,$password);
             $messages="Password Reset Successfully. You can LogIn ";
-            return redirect('admin.auth.login')->withErrors($messages);
+            return redirect('/login')->withErrors($messages);
         }
         else
         {

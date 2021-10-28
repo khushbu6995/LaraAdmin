@@ -16,10 +16,19 @@
 <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
 <!-- endinject -->
 <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+// $(document).ready(function(){
+//   $("#search").on('keyup',function(){
+//     alert("Mouse down over p1!");
+//   });
+// });
+</script>
 <style>
   .w-5 {
     display: none;
   }
+  
 </style>
 @endsection
 @section('mainContent')
@@ -29,22 +38,38 @@
             </div> -->
 
 
-  <div class="col-xl-9 d-flex grid-margin stretch-card">
+  <div class="col-xl-12 d-flex grid-margin stretch-card">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
+      <div class="card-title">
+      <form action="" method="">
+            <input type="text" name="search" id="search" class="form-control searchboxstyle" placeholder="Search" >
+            <button type="submit" class="btn btn-primary searchboxstyle btn-search">Submit</button>
+            <a href="/usermanagement">
+            <button  class="btn btn-light searchboxstyle btn-search">Reset</button></a>
+          </form>
+      </div>
         <div class="card-body">
+          <div class="card-title">
           <h4 class="card-title float-left">Users List</h4>
           <a href="/adduserform" class="btn btn-info font-weight-bold float-right">+ Add New User</a>
+          </div>
+              
+       
+          <!-- <input type="text" name="search" id="search"> -->
 
           <div class="table-responsive pt-3">
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>
+                  <!-- <th>
                     #
-                  </th>
+                  </th> -->
                   <th>
                     User Name
+                  </th>
+                  <th>
+                    Email
                   </th>
                   <th>
                     Action
@@ -57,11 +82,12 @@
                 @foreach($users as $key => $user)
                 <!-- @php($i++) -->
                 <tr>
-                  <td>
-                    {{$users->firstItem() + $key}}
-                  </td>
+                 
                   <td>
                     {{$user->name}}
+                  </td>
+                  <td>
+                  {{$user->email}}
                   </td>
                   <td>
                     <a href="/edituser/{{$user->id}}" class="icon-style icon-edit-style"><i class="icon-cog"></i></a>
@@ -85,8 +111,10 @@
   </div>
 
 </div>
+
 @endsection
 @section('jsload')
+
 <!-- base:js -->
 <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
 <!-- endinject -->
@@ -104,4 +132,5 @@
 <!-- Custom js for this page-->
 <script src="{{ asset('admin/js/dashboard.js') }}"></script>
 <!-- End custom js for this page-->
+
 @endsection

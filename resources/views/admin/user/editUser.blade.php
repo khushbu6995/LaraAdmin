@@ -24,7 +24,7 @@
 @endsection
 @section('mainContent')
 <div class="row">
-    <div class="col-xl-9 d-flex grid-margin stretch-card">
+    <div class="col-xl-12 d-flex grid-margin stretch-card">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 @if($errors->any())
@@ -35,6 +35,62 @@
                 </ul>
                 @endif
                 <div class="card-body">
+          <h4 class="card-title">Edit User</h4>
+          <form class="forms-sample" method="post" action="/updateUser/{{$user->id}}" enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Name</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="username" placeholder="Username" value="{{$user->name}}"> 
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{$user->email}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Phone</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="{{$user->phone}}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Address</label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" name="address" placeholder="Address">{{$user->address}}</textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Profile Image</label>
+                  <div class="col-sm-9">
+                      <img src="{{asset('public/admin/profile_image/'.$user->image)}}" alt="user-profile-img" height="100" width="100" name="old_file">
+                    <input type="file" class="form-control" name="file" placeholder="Add Profile Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a href="/usermanagement" class="btn btn-primary mr-2">Back To Users List</a>
+          </form>
+        </div>
+                <!-- <div class="card-body">
                     <h4 class="card-title">Edit User</h4>
                     <form class="forms-sample" method="post" action="/updateUser/{{$user->id}}">
                         @csrf
@@ -50,10 +106,22 @@
                                 <input type="email" class="form-control" id="exampleInputEmail2" name="email" value="{{$user->email}}">
                             </div>
                         </div>
-                   <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <div class="form-group row">
+                            <label for="exampleInputPhone" class="col-sm-3 col-form-label">Phone</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="exampleInputPhone" name="phone" value="{{$user->phone}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputAddress" class="col-sm-3 col-form-label">Address</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="exampleInputAddress" name="address">{{$user->address}}</textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

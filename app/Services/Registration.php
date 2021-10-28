@@ -11,6 +11,9 @@ class Registration
     public  $username;
     public $password;
     public $email;
+    public $phone;
+    public $address;
+    public $image;
         
     /**
      * @param name
@@ -19,7 +22,7 @@ class Registration
      * Insert record in users table
      * @author Khushbu Waghela
      */
-    public function insertRecord($username,$email,$password)
+    public function insertRecord($username,$email,$password,$phone,$address,$image)
     {
         $user= new User;
         $existing_user=User::whereEmail($email);
@@ -32,6 +35,9 @@ class Registration
         $user->name=$username;
         $user->email=$email;
         $user->password=$password;
+        $user->phone=$phone;
+        $user->address=$address;
+        $user->image=$image;
         $user->save();
 
     }

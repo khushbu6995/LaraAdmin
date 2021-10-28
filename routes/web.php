@@ -17,8 +17,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('admin.dashboard');
+})->middleware('auth');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');;
 Route::post('/login_check', [UserController::class, 'loginCheck'])->middleware('guest');;
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');;

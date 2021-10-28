@@ -1,14 +1,12 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="user-profile">
           <div class="user-image">
-            <img src="{{asset('admin/images/faces/face28.png')}}">
+            <img src="{{asset('public/admin/profile_image/'.$user_image)}}">
           </div>
           <div class="user-name">
-              Developer
+             {{session('email')}}
           </div>
-          <div class="user-designation">
-              Developer
-          </div>
+          
         </div>
         <ul class="nav">
           <li class="nav-item">

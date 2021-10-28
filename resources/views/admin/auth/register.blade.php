@@ -28,7 +28,7 @@
     </div>
     <h4>New here?</h4>
     <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-    <form class="pt-3" method="post" action="/registerCheck">
+    <form class="pt-3" method="post" action="/registerCheck" enctype="multipart/form-data">
       @csrf
       <div class="form-group">
         <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username" name="username" value="{{ old('username') }}">
@@ -36,12 +36,21 @@
       <div class="form-group">
         <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" name="email" value="{{ old('email') }}">
       </div>
-
+    
       <div class="form-group">
         <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password">
       </div>
       <div class="form-group">
         <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Confirm Password" name="confirmpassword">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control form-control-lg" id="exampleInputPhone1" placeholder="Phone" name="phone" value="{{ old('phone') }}">
+      </div>
+      <div class="form-group">
+        <textarea class="form-control form-control-lg" id="exampleInputaddress1" placeholder="Your Address" name="address" value="{{ old('address') }}"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="file" class="form-control form-control-lg" id="exampleInputaddress1" placeholder="Add Profile Image" name="file" >
       </div>
       <div class="mb-4">
         <div class="form-check">
