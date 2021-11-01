@@ -16,15 +16,13 @@
             </a>
           </li>
          
-         
-         
-          <li class="nav-item">
+        
+          <!-- <li class="nav-item">
             <a class="nav-link" href="/usermanagement">
               <i class="icon-help menu-icon"></i>
               <span class="menu-title">User Management</span>
-
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <i class="icon-help menu-icon"></i>
@@ -33,8 +31,8 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/adduserform">Add User</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/usermanagement">Users List</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/add-user-form">Add User</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/user-management">Users List</a></li>
               </ul>
             </div>
           </li>

@@ -22873,3 +22873,12 @@ border: 2px solid #8080806b;
   {
     width: 10%;
   }
+  .alert-success
+  {
+    margin-bottom: 1rem;
+  }
+  .alert-danger
+  {
+    margin-bottom: 1rem;
+  }
+  

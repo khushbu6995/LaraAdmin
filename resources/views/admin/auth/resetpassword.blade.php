@@ -15,19 +15,24 @@
 @section('maincontent')
 <div class="col-lg-4 mx-auto">
   <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-  @if($errors->any())
-    <ul class="error">
-      @foreach($errors->all() as $error)
-      <li> {{$error}}</li>
-      @endforeach
-    </ul>
+    @if($success=session('success'))
+    <div class="alert alert-success ">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>{{ $success }}</strong>
+    </div>
+    @endif
+    @if ($message = Session('error'))
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>{{ $message }}</strong>
+    </div>
     @endif
     <div class="brand-logo">
       <img src="{{asset('admin/images/logo-dark.svg')}}" alt="logo">
     </div>
     <h4>Reset Password</h4>
     <h6 class="font-weight-light">Email</h6>
-    <form class="pt-3" method="post" action="/passwordupdate">
+    <form class="pt-3" method="post" action="/password-update">
       @csrf
       <div class="form-group">
         <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" name="email" required>
@@ -41,7 +46,7 @@
       <div class="mt-3">
         <button type="submit" class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn">Save</button>
       </div>
-           
+
     </form>
   </div>
 </div>

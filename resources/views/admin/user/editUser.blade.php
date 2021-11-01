@@ -17,47 +17,35 @@
 <!-- endinject -->
 <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
 <style>
-    .w-5 {
-        display: none;
-    }
+  .w-5 {
+    display: none;
+  }
 </style>
 @endsection
 @section('mainContent')
 <div class="row">
-    <div class="col-xl-12 d-flex grid-margin stretch-card">
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                @if($errors->any())
-                <ul class="error">
-                    @foreach($errors->all() as $error)
-                    <li> {{$error}}</li>
-                    @endforeach
-                </ul>
-                @endif
-                <div class="card-body">
+  <div class="col-xl-12 d-flex grid-margin stretch-card">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+
+        @if ($message = Session('error'))
+        <div class="alert alert-danger alert-block">
+          <strong>{{ $message }}</strong>
+        </div>
+        @endif
+        <div class="card-body">
           <h4 class="card-title">Edit User</h4>
-          <form class="forms-sample" method="post" action="/updateUser/{{$user->id}}" enctype="multipart/form-data">
+          <form class="forms-sample" method="post" action="/update-User/{{$user->id}}" enctype="multipart/form-data">
             @csrf
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" name="username" placeholder="Username" value="{{$user->name}}"> 
+                    <input type="text" class="form-control" name="name" placeholder="Name" value="{{$user->name}}">
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Email</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{$user->email}}">
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Phone</label>
@@ -66,6 +54,11 @@
                   </div>
                 </div>
               </div>
+             
+            </div>
+
+            <div class="row">
+
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Address</label>
@@ -74,23 +67,22 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
+
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Profile Image</label>
                   <div class="col-sm-9">
-                      <img src="{{asset('public/admin/profile_image/'.$user->image)}}" alt="user-profile-img" height="100" width="100" name="old_file">
+                    <img src="{{asset('public/admin/profile_image/'.$user->image)}}" alt="user-profile-img" height="100" width="100" name="old_file">
                     <input type="file" class="form-control" name="file" placeholder="Add Profile Image">
                   </div>
                 </div>
               </div>
             </div>
             <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            <a href="/usermanagement" class="btn btn-primary mr-2">Back To Users List</a>
+            <a href="/user-management" class="btn btn-primary mr-2">Back To Users List</a>
           </form>
         </div>
-                <!-- <div class="card-body">
+        <!-- <div class="card-body">
                     <h4 class="card-title">Edit User</h4>
                     <form class="forms-sample" method="post" action="/updateUser/{{$user->id}}">
                         @csrf
@@ -122,9 +114,9 @@
                         <button class="btn btn-light">Cancel</button>
                     </form>
                 </div> -->
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
 </div>
 @endsection

@@ -36,7 +36,7 @@
                 @endif
                 <div class="card-body">
                     <h4 class="card-title">View User</h4>
-                    <form class="forms-sample" method="post" action="#">
+                    <form class="forms-sample" method="post" enctype="multipart/form-data" action="#">
                     @csrf
             <div class="row">
               <div class="col-md-6">
@@ -81,11 +81,11 @@
                   <label class="col-sm-3 col-form-label">Profile Image</label>
                   <div class="col-sm-9">
                       <img src="{{asset('public/admin/profile_image/'.$user->image)}}" alt="user-profile-img" height="100" width="100" name="old_file">
-                 </div>
+                    </div>
                 </div>
               </div>
             </div>
-                        <a href="/usermanagement" class="btn btn-primary mr-2">Back To Users List</a>
+                        <a href="/user-management" class="btn btn-primary mr-2">Back To Users List</a>
                   
                     </form>
                 </div>

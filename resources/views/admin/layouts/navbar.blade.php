@@ -16,15 +16,9 @@
               <i class="icon-cog"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-            
-             
-              
-              <!-- <form action="/logout" method="post">
-              @csrf -->
-              <a href="/logout" class="dropdown-item preview-item" > 
+           <a href="/logout" class="dropdown-item preview-item" > 
                   <i class="icon-inbox"></i> Logout
               </a>
-              <!-- </form> -->
             </div>
           </li>
          

@@ -19,33 +19,7 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-        @yield('mainContent')
-          <!-- <div class="row mt-5">
-            
-            <div class="col-xl-9 d-flex grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                      <h4 class="card-title">Website Audience Metrics</h4>
-                      <div class="row">
-                        <div class="col-lg-5">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit amet cumque cupiditate</p>
-                        </div>
-                        <div class="col-lg-7">
-                          <div class="chart-legends d-lg-block d-none" id="chart-legends"></div>
-                        </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-12">
-                              <canvas id="web-audience-metrics-satacked" class="mt-3"></canvas>
-                          </div>
-                      </div>
-                        
-                    </div>
-                  </div>
-            </div>
-          </div> -->
-          
-          
+        @yield('mainContent')        
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
