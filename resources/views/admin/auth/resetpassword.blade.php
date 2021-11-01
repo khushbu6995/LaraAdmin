@@ -21,12 +21,7 @@
       <strong>{{ $success }}</strong>
     </div>
     @endif
-    @if ($message = Session('error'))
-    <div class="alert alert-danger">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>{{ $message }}</strong>
-    </div>
-    @endif
+
     <div class="brand-logo">
       <img src="{{asset('admin/images/logo-dark.svg')}}" alt="logo">
     </div>
@@ -39,10 +34,18 @@
       </div>
       <div class="form-group">
         <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password">
+        @error('password')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
       </div>
+    
       <div class="form-group">
         <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Confirm Password" name="confirmpassword">
+        @error('confirmpassword')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
       </div>
+  
       <div class="mt-3">
         <button type="submit" class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn">Save</button>
       </div>

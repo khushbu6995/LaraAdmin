@@ -22,6 +22,13 @@
       @endforeach
 </div>
     @endif
+    @if($message = Session('error'))
+    <div class="col-lg-12 mx-auto">
+      <div class="alert alert-danger">
+      <strong> {{$message}}</strong>
+      </div>
+    </div>
+    @endif
     @if($message = Session('success'))
     <div class="col-lg-12 mx-auto">
       <div class="alert alert-success">

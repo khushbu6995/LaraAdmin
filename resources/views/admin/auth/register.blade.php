@@ -33,44 +33,44 @@
       <div class="form-group">
         <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username" name="name" value="{{ old('name') }}" required>
         @error('name')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger"><strong>{{ $message }}</strong></div>
         @enderror
       </div>
       <div class="form-group">
         <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" name="email" value="{{ old('email') }}" required>
         @error('email')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger"><strong>{{ $message }}</strong></div>
         @enderror
       </div>
 
       <div class="form-group">
         <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password" required>
         @error('password')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger"><strong>{{ $message }}</strong></div>
         @enderror
       </div>
       <div class="form-group">
         <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Confirm Password" name="confirmpassword" required>
         @error('confirmpassword')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger"><strong>{{ $message }}</strong></div>
         @enderror
       </div>
       <div class="form-group">
         <input type="text" class="form-control form-control-lg" id="exampleInputPhone1" placeholder="Phone" name="phone" value="{{ old('phone') }}" required>
         @error('phone')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger"><strong>{{ $message }}</strong></div>
         @enderror
       </div>
       <div class="form-group">
         <textarea class="form-control form-control-lg" id="exampleInputaddress1" placeholder="Your Address" name="address" value="{{ old('address') }}" required></textarea>
         @error('address')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger"><strong>{{ $message }}</strong></div>
         @enderror
       </div>
       <div class="form-group">
         <input type="file" class="form-control form-control-lg" id="exampleInputaddress1" placeholder="Add Profile Image" name="file" required>
         @error('address')
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="alert alert-danger"><strong>{{ $message }}</strong></div>
         @enderror
       </div>
 
