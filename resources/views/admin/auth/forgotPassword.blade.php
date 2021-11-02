@@ -49,6 +49,9 @@
       <div class="mt-3">
         <button type="submit" class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn">Send</button>
       </div>
+      <div class="text-center mt-4 font-weight-light float-right">
+        <a href="/login" class="text-primary">Login</a>
+      </div>
     </form>
   </div>
 </div>
