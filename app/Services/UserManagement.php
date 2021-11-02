@@ -36,11 +36,12 @@ class UserManagement
             $existing_user=$this->user_repo->email_find($email);
             if($existing_user)
             {
-                return redirect()->route('/add-user-form')->with('error',"Email already exists");
+                return redirect()->back()->with('error',"Email already exists");
             }
+            $path='public/admin/profile_image/';
             $extention = $image->getClientOriginalName();
             $filename = time() . "." . $extention;
-            $image->move('public/admin/profile_image/', $filename);
+            $image->move($path, $filename);
             $this->user_repo->store($name,$email,$password,$phone,$address,$filename);
     }
     catch(Throwable $t)

@@ -8,8 +8,13 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Validation\ValidationException;
 use App\Services\Registration;
+use App\Services\UserManagement;
+use Illuminate\Support\Facades\File;
+
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
+
 use App\Repositories\UserRepository1;
 
 class userController extends Controller
@@ -74,20 +79,19 @@ class userController extends Controller
     {
         $name = $request->name;
         $email = $request->email;
-        $password = bcrypt($request->password);
+        $password = Hash::make($request->password);
         $phone = $request->phone;
         $address = $request->address;
-        $filename = $request->file('file')->getClientOriginalName();
-        $filepath = $request->file('file')->storeAs('file', 'public/admin/profile_image/');
-        $file = $filepath . "/" . $filename;
+        $file = $request->file('file');
 
-
-        //share parameter with services/registration.php class
-        $reg = App::make(Registration::class);
+        //share parameter with services/UserManagement.php class
+        $reg = App::make(UserManagement::class);
 
         //function calling
-        $reg->insertRecord($name, $email, $password, $phone, $address, $file);
-        return redirect('/login');
+        $qry = $reg->insertRecord($name, $email, $password, $phone, $address, $file);
+        return redirect('/login')->with('success', "Registration Successfully");
+
+
     }
 
     /**
