@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use phpDocumentor\Reflection\PseudoTypes\LowercaseString;
 
 class UserRepository1 implements UserInterface
 {
@@ -39,7 +40,7 @@ class UserRepository1 implements UserInterface
      */
     public function searchRecord($search)
     {
-        return  User::where('name', "LIKE", "%$search%")->orWhere('email', "LIKE", "%$search%")->simplePaginate(5);
+        return  User::where('name', "LIKE", strtolower("%$search%"))->orWhere('email', "LIKE", strtolower("%$search%"))->simplePaginate(5);
     }
 
     /**
