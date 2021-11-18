@@ -72,18 +72,21 @@ class userController extends Controller
      */
     public function registerCheck(StoreUserRequest $request)
     {
-        $name = $request->name;
-        $email = $request->email;
-        $password = Hash::make($request->password);
-        $phone = $request->phone;
-        $address = $request->address;
-        $file = $request->file('file');
+            $insertFields = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'image' => $request->file('file'),
+            ];
+ 
 
         //share parameter with services/UserManagement.php class
         $reg = App::make(UserManagement::class);
 
         //function calling
-        $qry = $reg->insertRecord($name, $email, $password, $phone, $address, $file);
+        $qry = $reg->insertRecord($insertFields);
         return redirect('/login')->with('success', "Registration Successfully");
 
 
