@@ -4,7 +4,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,3 +62,9 @@ Route::middleware('auth')->group(function () {
 
 
 
+route::get('/testmail',function()
+{
+    $data=["message"=>"this is test"];
+    Mail::to('khushbuw.mobio@gmail.com')->send(new TestMail($data));
+    return back();
+});

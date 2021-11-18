@@ -1,15 +1,16 @@
 <?php
- namespace App\Services;
 
- use App\Models\User;
- use App\Repositories\UserRepository1;
- use Illuminate\Http\Request;
+namespace App\Services;
+
+use App\Models\User;
+use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\File;
 use Throwable;
 
-class UserManagement 
- {
+class UserManagement
+{
     public  $name;
     public $password;
     public $email;
@@ -18,11 +19,14 @@ class UserManagement
     public $old_image;
     public $image;
     protected $user_repo;
+    public $insertFields;
+    public $updateFields;
     // public $array_attribute;
-    public function __construct(UserRepository1 $user_repo)
+    public function __construct(UserRepository $user_repo)
     {
-        $this->user_repo=$user_repo;
-    }    
+        $this->user_repo = $user_repo;
+    }
+
     /**
      * @param name
      * @param email
@@ -30,51 +34,51 @@ class UserManagement
      * Insert record in users table
      * @author Khushbu Waghela
      */
-    public function insertRecord($name,$email,$password,$phone,$address,$image)
+    public function insertRecord($insertFields)
     {
-        try{
-            $existing_user=$this->user_repo->email_find($email);
-            if($existing_user)
-            {
-                return redirect()->back()->with('error',"Email already exists");
+        try {
+            $existing_user = $this->user_repo->email_find($insertFields['email']);
+            if ($existing_user) {
+                return redirect()->back()->with('error', "Email already exists");
             }
-            $path='public/admin/profile_image/';
-            $extention = $image->getClientOriginalName();
+            $path = 'public/admin/profile_image/';
+            $extention = $insertFields['image']->getClientOriginalName();
             $filename = time() . "." . $extention;
-            $image->move($path, $filename);
-            $this->user_repo->store($name,$email,$password,$phone,$address,$filename);
-    }
-    catch(Throwable $t)
-    {
-        // dd($t->getMessage(),$t->getLine(),$t->getFile());
-        // throw $t;
-        return view('admin.error.error');
-    }
-    }
-    public function updateRecord($id,$name,$phone, $address, $image)
-    { 
-        try{
-            $qry=$this->user_repo->update($id,$name,$phone,$address,$image);
-            
-        }
-        catch(Throwable $t){
-            // dd($t->getMessage(),$t->getLine(),$t->getFile());
-            // throw $t;
-            return view('admin.error.error');
-        }
-    }
-    public function deleteRecord($id)
-    {
-        try{
-             $this->user_repo->delete($id);
-        }
-        catch(Throwable $t)
-        {
-            // dd($t->getMessage(),$t->getLine(),$t->getFile());
-            // throw $t;
+            $insertFields['image']->move($path, $filename);
+            $insertFields['image']=$filename;
+            $this->user_repo->store($insertFields);
+        } catch (Throwable $t) {
             return view('admin.error.error');
         }
     }
 
-    
- }
+    /**
+     * @param name
+     * @param phone
+     * @param address
+     * @param image
+     * Update record in users table
+     * @author Khushbu Waghela
+     */
+    public function updateRecord($updateFields)
+    {
+        try {
+            $qry = $this->user_repo->update($updateFields);
+        } catch (Throwable $t) {
+            return view('admin.error.error');
+        }
+    }
+
+    /**
+     * @param id
+     * delete record from users table
+     */
+    public function deleteRecord($id)
+    {
+        try {
+            $this->user_repo->delete($id);
+        } catch (Throwable $t) {
+            return view('admin.error.error');
+        }
+    }
+}

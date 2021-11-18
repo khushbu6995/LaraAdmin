@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Repositories\UserRepository1;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Mail;
@@ -19,8 +19,7 @@ class Registration
     public $image;
     protected $user_repo;
 
-
-    public function __construct(UserRepository1 $user_repo)
+    public function __construct(UserRepository $user_repo)
     {
         $this->user_repo = $user_repo;
     }
@@ -36,18 +35,12 @@ class Registration
     {
         try {
             $existing_user = $this->user_repo->email_find($email);
-            if ($existing_user) {
-                $messages = "Email already exists";
-            }
+            ($existing_user) ? $messages = "Email already exists" :
             $this->user_repo->store($name, $email, $password, $phone, $address, $image);
         } catch (Throwable $t) {
-            // dd($t->getMessage(),$t->getLine(),$t->getFile());
-            // throw $t;
             return view('admin.error.error');
         }
     }
-
-
 
     /**
      * send mail to reset Password
@@ -56,15 +49,12 @@ class Registration
     public function forgotPassword($email)
     {
         try {
-            $data = ['Khusbu'];
-            $user = $email;
-            Mail::send('admin.auth.mail', $data, function ($messages) use ($user) {
-                $messages->to($user);
+            $data = ['Khushbu'];
+            Mail::send('admin.auth.mail', $data, function ($messages) use ($email) {
+                $messages->to($email);
                 $messages->subject('Password Reset');
             });
         } catch (Throwable $t) {
-            // dd($t->getMessage(),$t->getLine(),$t->getFile());
-            // throw $t;
             return view('admin.error.error');
         }
     }
@@ -76,12 +66,10 @@ class Registration
     public function resetPassword($email, $password)
     {
         try {
-            $user = User::where('email', $email)->first();
+            $user = $this->user_repo->email_find($email);
             $user->password = $password;
             $user->save();
         } catch (Throwable $t) {
-            // dd($t->getMessage(),$t->getLine(),$t->getFile());
-            // throw $t;
             return view('admin.error.error');
         }
     }

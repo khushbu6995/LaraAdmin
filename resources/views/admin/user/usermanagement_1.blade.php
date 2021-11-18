@@ -29,24 +29,37 @@
     $("#search_data").click(function(event) {
       event.preventDefault();
       var search = $("#search").val();
-      if (search != '') {
-        $.ajax({
-          url: "/user-management?search=" + search,
-          success: function(response) {
-            const users = response.data;
-            console.log(users);
-            var table = $('.table-responsive');
-            var row = '';
-            for (var i = 0; i < users.length; i++) {
-              row += "<tr><td>" + users[i]['name'] + "</td>"
-              row += "<td>" + users[i]['email'] + "</td>";
-              row += "<td> <a href='/edit-user/" + users[i]['id'] + "' class='icon-style icon-edit-style'><i class='icon-cog'></i></a><a href='/delete-user/" + users[i]['id'] + "' onclick='return confirm('You Really want to delete this user?')'class='icon-style icon-delete-style'><i class='icon-delete'></i></a><a href='/view-user/" + users[i]['id'] + "' class='icon-style icon-view-style'><i class='icon-file'></i></a></td></tr>";
-              $('.table-responsive tbody').html(row);
-            }
-          }
-        });
-      }
+      $.ajax({
+        url: "/user-management?search="+search+"search_data",
+        success: function(response) {
+          console.log('done');
+          // var table_data = JSON.parse(response);
+          // var table = $('#getajaxData').DataTable( {
+          //   data: table_data
+          // var table=$("#getajaxData")
+          // for(var i=0;i<response.length;i++)
+          // {
+          //   var row="<tr><td>${response[i].name}</td><td>${response[i].email}</td><td> <a href='/edit-user/${response[i].id}' class='icon-style icon-edit-style'><i class='icon-cog'></i></a><a href='/delete-user/${response[i].id}' onclick='return confirm('You Really want to delete this user?')'class='icon-style icon-delete-style'><i class='icon-delete'></i></a><a href='/view-user/${response[i].id}' class='icon-style icon-view-style'><i class='icon-file'></i></a></td><tr>";
+          //   table.innerHTML +=row;
+          // }
+          // });
+        }
+      });
     });
+
+    // $.ajax({
+    //   url: "/user-management",
+    //   // type: "get", //send it through get method
+    //   data: {
+    //     search: search,
+    //   },
+    //   success: function(response) {
+    //     console.log('done');
+    //   },
+    // });
+
+    // $.get('/user-management', search, success, jsonp)
+
   });
 </script>
 <style>
@@ -79,7 +92,7 @@
 
           <!-- <input type="text" name="search" id="search"> -->
           <div class="table-responsive pt-3">
-            <table class="table table-bordered" id="display_data">
+            <table class="table table-bordered">
               <thead>
                 <tr>
                   <th>
@@ -93,9 +106,12 @@
                   </th>
                 </tr>
               </thead>
-              <tbody id="ajax_data_print">
+              <tbody id="getajaxData">
+
                 @foreach($users as $key => $user)
+
                 <tr>
+
                   <td>
                     {{$user->name}}
                   </td>
@@ -104,7 +120,11 @@
                   </td>
                   <td>
                     <a href="/edit-user/{{$user->id}}" class="icon-style icon-edit-style"><i class="icon-cog"></i></a>
+
+
+
                     <a href="/delete-user/{{$user->id}}" onclick="return confirm('You Really want to delete this user?')" class="icon-style icon-delete-style"><i class="icon-delete"></i></a>
+
                     <a href="/view-user/{{$user->id}}" class="icon-style icon-view-style"><i class="icon-file"></i></a>
                   </td>
                 </tr>
@@ -120,6 +140,7 @@
     </div>
   </div>
 </div>
+
 </div>
 </div>
 

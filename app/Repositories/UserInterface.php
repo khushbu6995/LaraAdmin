@@ -33,13 +33,13 @@ interface UserInterface
      * Insert record in database
      * @author Khushbu Waghela
      */
-    public function store($name, $email, $password, $phone, $address, $image);
+    public function store(array $insertFields);
 
     /**
      * Update Record in database
      * @author Khushbu Waghela
      */
-    public function update($id, $name, $phone, $address, $image);
+    public function update(array $updateFields);
 
     /**
      *delete record by id

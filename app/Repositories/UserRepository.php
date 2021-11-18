@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use phpDocumentor\Reflection\PseudoTypes\LowercaseString;
 
-class UserRepository1 implements UserInterface
+class UserRepository implements UserInterface
 {
     /**
      * get all the record in assending order
@@ -45,32 +45,22 @@ class UserRepository1 implements UserInterface
 
     /**
      * Insert record in database
+     * 
      * @author Khushbu Waghela
      */
-    public function store($name, $email, $password, $phone, $address, $image)
+    public function store($insertFields)
     {
-        $user = new User;
-        $user->name = $name;
-        $user->email = $email;
-        $user->password = $password;
-        $user->phone = $phone;
-        $user->address = $address;
-        $user->image = $image;
-        $user->save();
+        User::create($insertFields);
     }
 
     /**
+     * 
      * Update Record in database
      * @author Khushbu Waghela
      */
-    public function update($id, $name, $phone, $address, $image)
+    public function update($updateFields)
     {
-        $user = User::find($id);
-        $user->name = $name;
-        $user->phone = $phone;
-        $user->address = $address;
-        $user->image = $image;
-        $user->save();
+        $user = User::find($updateFields['id'])->update($updateFields);
     }
 
     /**
@@ -88,8 +78,7 @@ class UserRepository1 implements UserInterface
      */
     public function email_verify()
     {
-        $email = session('email');
-        $user_email = User::where('email', "=", $email)->firstOrFail();
+        $user_email = User::where('email', "=",  session('email'))->firstOrFail();
         return $user_image = $user_email['image'];
     }
 

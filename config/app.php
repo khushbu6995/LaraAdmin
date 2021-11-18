@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\Registration::class,
         App\Providers\UserManagement::class,
+        Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
+        
     ],
 
     /*

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Repositories\UserRepository;
 use Illuminate\Validation\ValidationException;
 use App\Services\Registration;
 use App\Services\UserManagement;
@@ -21,7 +23,7 @@ class userController extends Controller
 {
 
     public $user_repo;
-    public function __construct(UserRepository1 $user_repo)
+    public function __construct(UserRepository $user_repo)
     {
         $this->user_repo = $user_repo;
     }
@@ -40,24 +42,17 @@ class userController extends Controller
      * check whether user exists in table or not if exists user going to login
      * @author Khushbu Waghela
      */
-    public function loginCheck()
+    public function loginCheck(LoginRequest $request)
     {
-        $attributes = request()->validate(
-            [
-                'email' => 'required|email',
-                'password' => 'required',
-            ]
-        );
-        $email = request('email');
-        if (auth()->attempt($attributes)) {
-
-            request()->session()->put('email', $email);
-            return redirect('/dashboard')->with("success", "welcome Back");
+        $attributes = [
+                'email' => $request->email,
+                'password' => $request->password,
+        ];
+        if (!(auth()->attempt($attributes))) {
+            return redirect('/login')->with('error', "Please Enter Correct Email Password");
         }
-        throw validationException::withMessages([
-            'email' => "provided credentials could not be verified"
-        ]);
-        return redirect('/login')->with('error', "Please Enter Correct Email Password");
+        request()->session()->put('email', $attributes['email']);
+            return redirect('/dashboard');
     }
 
     /**
@@ -110,15 +105,13 @@ class userController extends Controller
      */
     public function resetPassword(Request $request)
     {
-        $email = $request['email'];
-        $existing_user = $this->user_repo->email_find($email);
-        if ($existing_user) {
-            $reg = App::make(Registration::class);
-            $reg->forgotPassword($email);
-            return redirect()->back()->withInput()->with('success', "Email sent !!! Check Your gmail and reset Password");
-        } else {
+        $existing_user = $this->user_repo->email_find($request['email']);
+        if (!$existing_user) {
             return redirect()->back()->withInput()->with('error', 'Email Not Exists!!');
         }
+        $reg = App::make(Registration::class);
+        $reg->forgotPassword($request['email']);
+        return redirect()->back()->withInput()->with('success', "Email sent !!! Check Your gmail and reset Password");
     }
 
     /**
@@ -137,15 +130,12 @@ class userController extends Controller
      */
     public function passwordUpdate(ResetPasswordRequest $request)
     {
-        $email = $request->email;
-        $password = bcrypt($request->password);
-        $user = $this->user_repo->email_find($email);
-        if ($user) {
-            $reg = App::make(Registration::class);
-            $reg->resetPassword($email, $password);
-            return redirect('/login')->with('success', 'Password Reset Successfully. You can LogIn ');
-        } else {
+        $user = $this->user_repo->email_find($request->email);
+        if (!$user) {
             return redirect()->back()->withInput()->with('error', "Please Enter Correct Email!!!!");
-        }
+        } 
+        $reg = App::make(Registration::class);
+        $reg->resetPassword($request->email,bcrypt($request->password));
+        return redirect('/login')->with('success', 'Password Reset Successfully. You can LogIn ');
     }
 }
