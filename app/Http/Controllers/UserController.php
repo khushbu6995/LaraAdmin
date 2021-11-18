@@ -81,7 +81,6 @@ class userController extends Controller
                 'image' => $request->file('file'),
             ];
  
-
         //share parameter with services/UserManagement.php class
         $reg = App::make(UserManagement::class);
 

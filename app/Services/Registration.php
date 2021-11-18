@@ -25,33 +25,16 @@ class Registration
     }
 
     /**
-     * @param name
-     * @param email
-     * @param password
-     * Insert record in users table
-     * @author Khushbu Waghela
-     */
-    public function insertRecord($name, $email, $password, $phone, $address, $image)
-    {
-        try {
-            $existing_user = $this->user_repo->email_find($email);
-            ($existing_user) ? $messages = "Email already exists" :
-            $this->user_repo->store($name, $email, $password, $phone, $address, $image);
-        } catch (Throwable $t) {
-            return view('admin.error.error');
-        }
-    }
-
-    /**
      * send mail to reset Password
      * @author Khushbu Waghela
      */
     public function forgotPassword($email)
     {
         try {
-            $data = ['Khushbu'];
-            Mail::send('admin.auth.mail', $data, function ($messages) use ($email) {
-                $messages->to($email);
+            $data = ['Khusbu'];
+            $user = $email;
+            Mail::send('admin.auth.mail', $data, function ($messages) use ($user) {
+                $messages->to($user);
                 $messages->subject('Password Reset');
             });
         } catch (Throwable $t) {

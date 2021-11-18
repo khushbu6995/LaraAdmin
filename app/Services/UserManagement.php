@@ -21,16 +21,18 @@ class UserManagement
     protected $user_repo;
     public $insertFields;
     public $updateFields;
-    // public $array_attribute;
     public function __construct(UserRepository $user_repo)
     {
         $this->user_repo = $user_repo;
     }
 
     /**
-     * @param name
+     * @param name 
      * @param email
      * @param password
+     * @param phone
+     * @param address
+     * @param image
      * Insert record in users table
      * @author Khushbu Waghela
      */

@@ -44,7 +44,6 @@ class DashboardController extends Controller
         $search = $request['search'] ?? '';
         if ($search != '') {
           return $users=$this->user_repo->searchRecord($search);
-          
         }else{
         $users = $this->user_repo->all();
         }
@@ -63,7 +62,13 @@ class DashboardController extends Controller
     }
 
     /**
-     * Insert User
+     * @param name
+     * @param email
+     * @param password
+     * @param phone
+     * @param address
+     * @param image
+     * Insert User to database
      * @author Khushbu Waghela
      */
     public function insertUser(StoreUserRequest $request)
@@ -98,6 +103,10 @@ class DashboardController extends Controller
     }
 
     /**
+     * @param name
+     * @param phone
+     * @param address
+     * @param image
      * update user
      * @author Khushbu Waghela
      */
@@ -131,6 +140,7 @@ class DashboardController extends Controller
     }
 
     /**
+     * @param id
      * delete User
      * @author Khushbu Waghela
      */
