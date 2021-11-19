@@ -16,6 +16,9 @@
           <a href="/logout" class="dropdown-item preview-item">
             <i class="icon-inbox"></i> Logout
           </a>
+          <a href="/change-Password" class="dropdown-item preview-item">
+            <i class="icon-help"></i> Change Password
+          </a>
         </div>
       </li>
     </ul>

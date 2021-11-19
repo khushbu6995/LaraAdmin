@@ -25,8 +25,7 @@
       <div class="card">
         <div class="card-title">
           <form action="" method="">
-            <!-- @csrf -->
-            <input type="text" name="search" id="search" class="form-control searchboxstyle" placeholder="Search">
+            <input type="text" name="search" id="search"  class="form-control searchboxstyle">
             <button name="search_data" id="search_data" class="btn btn-info font-weight-bold mt-3">Search</button>
           </form>
         </div>
@@ -64,7 +63,7 @@
                   </td>
                   <td>
                     <a href="/edit-user/{{$user->id}}" class="icon-style icon-edit-style"><i class="icon-cog"></i></a>
-                    <a href="/delete-user/{{$user->id}}" onclick="return confirm('You Really want to delete this user?')" class="icon-style icon-delete-style"><i class="icon-delete"></i></a>
+                    <a href="/delete-user/{{$user->id}}" onclick="return confirm('You Really want to delete this user?')" class="icon-style icon-delete-style"><i class="icon-circle-cross"></i></a>
                     <a href="/view-user/{{$user->id}}" class="icon-style icon-view-style"><i class="icon-file"></i></a>
                   </td>
                 </tr>
@@ -97,15 +96,15 @@
           url: "/user-management?search=" + search,
           success: function(response) {
             const users = response.data;
-            console.log(users);
+            // console.log(users);
             var table = $('.table-responsive');
             var row = '';
             for (var i = 0; i < users.length; i++) {
               row += "<tr><td>" + users[i]['name'] + "</td>"
               row += "<td>" + users[i]['email'] + "</td>";
               row += "<td> <a href='/edit-user/" + users[i]['id'] + "' class='icon-style icon-edit-style'><i class='icon-cog'></i></a><a href='/delete-user/" + users[i]['id'] + "' onclick='return confirm('You Really want to delete this user?')'class='icon-style icon-delete-style'><i class='icon-delete'></i></a><a href='/view-user/" + users[i]['id'] + "' class='icon-style icon-view-style'><i class='icon-file'></i></a></td></tr>";
-              $('.table-responsive tbody').html(row);
             }
+            $('.table-responsive tbody').html(row);
           }
         });
       }

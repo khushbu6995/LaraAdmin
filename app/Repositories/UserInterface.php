@@ -58,4 +58,10 @@ interface UserInterface
      * @author Khushbu Waghela
      */
     public function email_find($email);
+
+     /**
+     * find record by email
+     * @author Khushbu Waghela
+     */
+    public function password_check($password);
 }

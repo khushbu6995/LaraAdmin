@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 use App\Services\Registration;
 use App\Services\UserManagement;
 use Illuminate\Support\Facades\File;
-
+use App\Http\Requests\changePassword;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -45,14 +45,14 @@ class userController extends Controller
     public function loginCheck(LoginRequest $request)
     {
         $attributes = [
-                'email' => $request->email,
-                'password' => $request->password,
+            'email' => $request->email,
+            'password' => $request->password,
         ];
         if (!(auth()->attempt($attributes))) {
             return redirect('/login')->with('error', "Please Enter Correct Email Password");
         }
         request()->session()->put('email', $attributes['email']);
-            return redirect('/dashboard');
+        return redirect('/dashboard');
     }
 
     /**
@@ -72,23 +72,21 @@ class userController extends Controller
      */
     public function registerCheck(StoreUserRequest $request)
     {
-            $insertFields = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'image' => $request->file('file'),
-            ];
- 
+        $insertFields = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'image' => $request->file('file'),
+        ];
+
         //share parameter with services/UserManagement.php class
         $reg = App::make(UserManagement::class);
 
         //function calling
         $qry = $reg->insertRecord($insertFields);
         return redirect('/login')->with('success', "Registration Successfully");
-
-
     }
 
     /**
@@ -135,9 +133,39 @@ class userController extends Controller
         $user = $this->user_repo->email_find($request->email);
         if (!$user) {
             return redirect()->back()->withInput()->with('error', "Please Enter Correct Email!!!!");
-        } 
+        }
         $reg = App::make(Registration::class);
-        $reg->resetPassword($request->email,bcrypt($request->password));
+        $reg->resetPassword($request->email, bcrypt($request->password));
         return redirect('/login')->with('success', 'Password Reset Successfully. You can LogIn ');
+    }
+
+    /**
+     * redirect to change password page
+     */
+    public function changePassword()
+    {
+        $user_email = $this->user_repo->email_find(session('email'));;
+        $user_image = $user_email->image;
+        return view('admin.auth.changepassword', compact('user_image'));
+    }
+
+    /**
+     * @param old password
+     * @param New password
+     * @param confirm password
+     * redirect to change password page
+     */
+    public function NewPassword(changePassword $request)
+    {
+        return "this is NewPassword set page";
+        // $oldPassword=Hash::make($request->oldpassword);
+        // // $oldPassword->PasswordCheck($request->email, bcrypt($request->password));
+        // $availableOldPasswordCheck=App::make(Registration::class);
+
+        // $oldPasswordCheck = $this->user_repo->password_check($oldPassword);;
+
+        // $user_email = $this->user_repo->email_find(session('email'));;
+        // $user_image = $user_email->image;
+        // return view('admin.auth.changepassword', compact('user_image'));
     }
 }
