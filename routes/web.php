@@ -39,7 +39,7 @@ Route::get('/logout', [DashboardController::class, 'destroy']);
 
 Route::middleware('auth')->group(function () {
 Route::get('/change-Password', [UserController::class, 'changePassword']);
-Route::get('/change-new-password', [UserController::class, 'NewPassword']);
+Route::post('/change-new-password', [UserController::class, 'NewPassword']);
 
     //redirect to dashboard
     Route::get('/', [DashboardController::class, 'index']);

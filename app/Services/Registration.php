@@ -7,6 +7,8 @@ use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+
 use Throwable;
 
 class Registration
@@ -55,5 +57,10 @@ class Registration
         } catch (Throwable $t) {
             return view('admin.error.error');
         }
+    }
+
+    public function PasswordCheck($email,$newpassword)
+    {
+        $user=$this->user_repo->update_password($email,$newpassword);      
     }
 }

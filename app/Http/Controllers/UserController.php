@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\ResetPasswordRequest;
@@ -157,15 +158,15 @@ class userController extends Controller
      */
     public function NewPassword(changePassword $request)
     {
-        return "this is NewPassword set page";
-        // $oldPassword=Hash::make($request->oldpassword);
-        // // $oldPassword->PasswordCheck($request->email, bcrypt($request->password));
-        // $availableOldPasswordCheck=App::make(Registration::class);
-
-        // $oldPasswordCheck = $this->user_repo->password_check($oldPassword);;
-
-        // $user_email = $this->user_repo->email_find(session('email'));;
-        // $user_image = $user_email->image;
-        // return view('admin.auth.changepassword', compact('user_image'));
+        $email=session('email');
+        $user = $this->user_repo->email_find($email);;
+        $currentuserpassword = $user->password;
+        if (!Hash::check($request->oldpassword, $currentuserpassword)) {
+            return back()->with('error', "Please Enter Correct Password");
+        } else {
+            $newPasswordCreate = App::make(Registration::class);
+            $newPasswordCreate->PasswordCheck($email, Hash::make($request->password));
+            return back()->with('success', "Password Updated Successfully");
+        }
     }
 }

@@ -90,8 +90,15 @@ class UserRepository implements UserInterface
     {
         return User::where('email', $email)->first();
     }
-    public function password_check($password)
+    public function password_check($email,$password)
     {
-        return User::where('password', $password)->first();
+        $user=User::where('email', $email)->first();
+        return $password=$user['password'];
+    }
+    public function update_password($email,$newpassword)
+    {
+        $user = User::where('email',$email)->first();
+        $user->password = $newpassword;
+        $user->save();
     }
 }

@@ -26,6 +26,11 @@
           <strong>{{ $message }}</strong>
         </div>
         @endif
+        @if ($message = Session('success'))
+        <div class="alert alert-success alert-block">
+          <strong>{{ $message }}</strong>
+        </div>
+        @endif
         <div class="card-body">
           <h4 class="card-title">Change Password</h4>
           <form class="forms-sample" id="user-add-form" method="post" action="/change-new-password">
