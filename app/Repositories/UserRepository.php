@@ -45,7 +45,6 @@ class UserRepository implements UserInterface
 
     /**
      * Insert record in database
-     * 
      * @author Khushbu Waghela
      */
     public function store($insertFields)
@@ -54,7 +53,6 @@ class UserRepository implements UserInterface
     }
 
     /**
-     * 
      * Update Record in database
      * @author Khushbu Waghela
      */
@@ -64,6 +62,7 @@ class UserRepository implements UserInterface
     }
 
     /**
+     * @param delete
      *delete record by id
      * @author Khushbu Waghela
      */
@@ -83,6 +82,7 @@ class UserRepository implements UserInterface
     }
 
     /**
+     * @param email
      * find record by email
      * @author Khushbu Waghela
      */
@@ -90,14 +90,28 @@ class UserRepository implements UserInterface
     {
         return User::where('email', $email)->first();
     }
-    public function password_check($email,$password)
+
+    /**
+     * @param email
+     * @param password
+     * check password by email
+     * @author Khushbu Waghela
+     */
+    public function password_check($email, $password)
     {
-        $user=User::where('email', $email)->first();
-        return $password=$user['password'];
+        $user = User::where('email', $email)->first();
+        return $password = $user['password'];
     }
-    public function update_password($email,$newpassword)
+
+    /**
+     * @param email
+     * @param password
+     * update password by email
+     * @author Khushbu Waghela
+     */
+    public function update_password($email, $newpassword)
     {
-        $user = User::where('email',$email)->first();
+        $user = User::where('email', $email)->first();
         $user->password = $newpassword;
         $user->save();
     }

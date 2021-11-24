@@ -11,7 +11,7 @@
 <body>
   <div class="container-scroller">
     @include('admin.layouts.navbar')
-    <div class="container-fluid page-body-wrapper">
+    <div class="container-fluid page-body-wrapper pl-0" style="margin-left: 0 !important;">
       @include('admin.layouts.slidebar')
       <div class="main-panel">
         <div class="content-wrapper">

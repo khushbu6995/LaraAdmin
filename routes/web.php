@@ -2,10 +2,16 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataTableDashboardController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Mail;
+use Yajra\Datatables\Datatables;
+use Illuminate\Http\Request;
+
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,8 +51,10 @@ Route::post('/change-new-password', [UserController::class, 'NewPassword']);
     Route::get('/', [DashboardController::class, 'index']);
     //redirect to dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard-datatable', [DashboardController::class, 'indexViewDataTable']);
     //redirect to users list
     Route::get('/user-management', [DashboardController::class, 'userManagement']);
+    Route::post('/sort-data', [DashboardController::class, 'sortData']);
     //redirect to edit selected user to blade file
     Route::get('/edit-user/{id}', [DashboardController::class, 'editUser']);
     //redirect to selected update user in database
@@ -61,6 +69,23 @@ Route::post('/change-new-password', [UserController::class, 'NewPassword']);
     route::get('/add-user-form', [DashboardController::class, 'addUserForm']);
     //add user in database
     Route::post('/insert-User', [DashboardController::class, 'insertUser']);
+
+    Route::get('/employee',[DataTableDashboardController::class,'index']);
+    // Route::view('user-management1','admin.user.usermanagement_datatable_edit_delete_link');
+    Route::get('user-management1',[DashboardController::class,'userManagement1']);
+    Route::get('getUser', function (Request $request) {
+        if ($request->ajax()) {
+                $data = User::latest()->get();
+                return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $actionBtn = '<a href="/edit-user/'.$row['id'].'" class="edit btn btn-success btn-sm"  data-id="'.$row->id.'">Edit</a> <a href="/delete-user/'.$row['id'].'"  data-id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</a>';
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
+    })->name('user.index'); 
 });
 
 

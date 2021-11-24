@@ -52,7 +52,11 @@ class userController extends Controller
         if (!(auth()->attempt($attributes))) {
             return redirect('/login')->with('error', "Please Enter Correct Email Password");
         }
+        // $user=User::where('email',$attributes['email'])->get();
+        // $image=$user->image;
+        // $image_path = 'public/admin/profile_image/'.$image;
         request()->session()->put('email', $attributes['email']);
+        // request()->session()->put('image');
         return redirect('/dashboard');
     }
 
@@ -128,6 +132,7 @@ class userController extends Controller
      * @param email
      * @param Password
      * take email and password for reset the password and save it to database
+     * @author Khushbu Waghela
      */
     public function passwordUpdate(ResetPasswordRequest $request)
     {
@@ -135,13 +140,14 @@ class userController extends Controller
         if (!$user) {
             return redirect()->back()->withInput()->with('error', "Please Enter Correct Email!!!!");
         }
-        $reg = App::make(Registration::class);
-        $reg->resetPassword($request->email, bcrypt($request->password));
+        $usersExists = App::make(Registration::class);
+        $usersExists->resetPassword($request->email, bcrypt($request->password));
         return redirect('/login')->with('success', 'Password Reset Successfully. You can LogIn ');
     }
 
     /**
      * redirect to change password page
+     * @author Khushbu Waghela
      */
     public function changePassword()
     {
@@ -155,13 +161,13 @@ class userController extends Controller
      * @param New password
      * @param confirm password
      * redirect to change password page
+     * @author Khushbu Waghela
      */
     public function NewPassword(changePassword $request)
     {
-        $email=session('email');
+        $email = session('email');
         $user = $this->user_repo->email_find($email);;
-        $currentuserpassword = $user->password;
-        if (!Hash::check($request->oldpassword, $currentuserpassword)) {
+        if (!Hash::check($request->oldpassword, $user->password)) {
             return back()->with('error', "Please Enter Correct Password");
         } else {
             $newPasswordCreate = App::make(Registration::class);

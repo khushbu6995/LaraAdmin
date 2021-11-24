@@ -1,7 +1,7 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas ml-0" id="sidebar">
   <div class="user-profile">
     <div class="user-image">
-      <img src="{{asset('public/admin/profile_image/'.$user_image)}}">
+    <img src="{{asset('public/admin/profile_image/'.$user_image)}}">
     </div>
     <div class="user-name">
       {{session('email')}}
@@ -23,7 +23,7 @@
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="/add-user-form">Add User</a></li>
-          <li class="nav-item"> <a class="nav-link" href="/user-management">Users List</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/user-management1">Users List</a></li>
         </ul>
       </div>
     </li>

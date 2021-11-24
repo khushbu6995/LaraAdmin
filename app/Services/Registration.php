@@ -59,6 +59,12 @@ class Registration
         }
     }
 
+    /**
+     * @param email
+     * @param newpassword
+     * update password in database
+     * @author Khushbu Waghela
+     */
     public function PasswordCheck($email,$newpassword)
     {
         $user=$this->user_repo->update_password($email,$newpassword);      

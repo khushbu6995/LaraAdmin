@@ -62,5 +62,4 @@
   <script src="{{ asset('admin/vendors/chart.js/Chart.min.js') }}"></script>
   <script src="{{ asset('admin/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
   <script src="{{ asset('admin/js/dashboard.js') }}"></script>
-  <script src="{{ asset('admin/js/clock.js') }}"></script>
   @endsection

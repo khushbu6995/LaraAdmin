@@ -66,7 +66,7 @@ interface UserInterface
     public function password_check($email,$password);
 
     /**
-     * get the password
+     * update the password
      * @author Khushbu Waghela
      */
     public function update_password($email,$password);

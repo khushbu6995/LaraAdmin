@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+// use App\DataTables\UserDataTable;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\App;
@@ -13,6 +13,7 @@ use App\Services\UserManagement;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Events\TaskEvent;
+use DataTable;
 
 class DashboardController extends Controller
 {
@@ -33,22 +34,58 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact('user_image', 'users'));
     }
 
+    // public function indexViewDataTable(UserDataTable $dataTable)
+    // {
+    //     $user_email = $this->user_repo->email_find(session('email'));;
+    //     $user_image = $user_email->image;
+    //     return $dataTable->render('admin.dashboard_datatable',compact('user_image'));
+    // }
+
+
     /**
      * redirect to User's list page
      * @author Khushbu Waghela
      */
-    public function userManagement(Request $request)
+    // public function userManagement(Request $request,UserDataTable $dataTable)
+    // {
+    //     $user_email = $this->user_repo->email_find(session('email'));
+    //     $user_image = $user_email->image;
+    //     $search = $request['search'] ?? '';
+    //     if ($search != '') {
+    //         return $users = $this->user_repo->searchRecord($search);
+    //     } else {
+    //         $users = $this->user_repo->all();
+    //     }
+    //     return view('admin.user.usermanagement', compact('user_image', 'users'));
+      
+    //     // return $dataTable->render('admin.user.usermanagement_datatable');
+    // }
+
+    // public function userManagement(Request $request)
+    // {
+    //     $user_email = $this->user_repo->email_find(session('email'));
+    //         $user_image = $user_email->image;
+    //     if ($request->ajax()) {
+    //         $data = User::latest()->get();
+    //         return Datatables::of($data)
+    //             ->addIndexColumn()
+    //             ->addColumn('action', function($row){
+    //                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+    //                 return $actionBtn;
+    //             })
+    //             ->rawColumns(['action'])
+    //             ->make(true);
+    //     }
+    //     return view('admin.user.usermanagement_datatable_edit_delete_link',compact('user_image'));  
+    // }
+    public function userManagement1(Request $request)
     {
         $user_email = $this->user_repo->email_find(session('email'));
         $user_image = $user_email->image;
-        $search = $request['search'] ?? '';
-        if ($search != '') {
-          return $users=$this->user_repo->searchRecord($search);
-        }else{
-        $users = $this->user_repo->all();
-        }
-        return view('admin.user.usermanagement', compact('user_image', 'users'));
+        return view('admin.user.usermanagement_datatable_edit_delete_link',compact('user_image'));
     }
+
+  
 
     /**
      * redirect to Add user Form
@@ -119,7 +156,7 @@ class DashboardController extends Controller
             $extention = $file->getClientOriginalName();
             $filename = time() . "." . $extention;
             $file->move('public/admin/profile_image/', $filename);
-        }else{
+        } else {
             $user = $this->user_repo->get($id);
             $filename = $user->image;
         }
@@ -170,5 +207,15 @@ class DashboardController extends Controller
     {
         auth()->logout();
         return redirect('/login');
+    }
+
+    public function sortData(Request $request)
+    {
+        if ($request->ajax()) {
+            $sort_by=$request->get('sortby');
+            $sort_type=$request->get('sorttype');
+            $users = User::orderBy($sort_by, $sort_type)->get();
+            return view('admin.user.usermanagement', compact('users'));
+        }
     }
 }
