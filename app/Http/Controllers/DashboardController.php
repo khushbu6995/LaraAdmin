@@ -124,7 +124,7 @@ class DashboardController extends Controller
 
         //function calling
         $qry = $reg->insertRecord($insertFields);
-        return redirect('/user-management')->with('success', "Record Inserted Successfully");
+        return redirect('/user-management1')->with('success', "Record Inserted Successfully");
     }
 
     /**
@@ -173,7 +173,7 @@ class DashboardController extends Controller
         //function calling
         $qry = $reg->updateRecord($updateFields);
 
-        return redirect('/user-management')->with('success', "Record Updated Successfully");
+        return redirect('/user-management1')->with('success', "Record Updated Successfully");
     }
 
     /**
@@ -184,7 +184,7 @@ class DashboardController extends Controller
     public function deleteUser($id)
     {
         $qry = $this->user_repo->delete($id);
-        return redirect('/user-management')->with('success', "User Deleted Successfully");
+        return redirect('/user-management1')->with('success', "User Deleted Successfully");
     }
 
     /**
@@ -215,7 +215,7 @@ class DashboardController extends Controller
             $sort_by=$request->get('sortby');
             $sort_type=$request->get('sorttype');
             $users = User::orderBy($sort_by, $sort_type)->get();
-            return view('admin.user.usermanagement', compact('users'));
+            return view('admin.user.usermanagement1', compact('users'));
         }
     }
 }

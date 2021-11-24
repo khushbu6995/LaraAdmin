@@ -17,9 +17,12 @@
   @section('mainContent')
  <div class="row">
   <div class="col-xl-12 d-flex grid-margin stretch-card">
+    
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
+  
         <div class="card-body">
+        <a href="/add-user-form" class="btn btn-info font-weight-bold float-right btn-clr-blue">+ Add New User</a>
           <h4 class="card-title float-left">Users List</h4>
           <div class="table-responsive pt-3">
           <table class="table table-bordered yajra-datatable">

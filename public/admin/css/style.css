@@ -22882,3 +22882,7 @@ border: 2px solid #8080806b;
     margin-bottom: 1rem;
   }
   
+  .btn-clr-blue
+  {
+    background-color: #007bff !important;
+  }

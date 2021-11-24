@@ -79,7 +79,8 @@ Route::post('/change-new-password', [UserController::class, 'NewPassword']);
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $actionBtn = '<a href="/edit-user/'.$row['id'].'" class="edit btn btn-success btn-sm"  data-id="'.$row->id.'">Edit</a> <a href="/delete-user/'.$row['id'].'"  data-id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</a>';
+                        $actionBtn = '<a href="/edit-user/'.$row['id'].'" class="edit btn btn-success btn-sm"  data-id="'.$row->id.'"><i class="icon-cog"></i></a> <a href="/delete-user/'.$row['id'].'"  data-id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="icon-circle-cross"></i></a>
+                        <a href="/view-user/'.$row['id'].'"  data-id="'.$row->id.'" class="delete btn btn-info btn-sm"><i class="icon-file"></i></a>';
                         return $actionBtn;
                     })
                     ->rawColumns(['action'])
