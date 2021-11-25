@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{ asset('admin/vendors/jquery-bar-rating/fontawesome-stars.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
   <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/> -->
         <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
   @endsection
@@ -23,7 +23,7 @@
   
         <div class="card-body">
         <a href="/add-user-form" class="btn btn-info font-weight-bold float-right btn-clr-blue m-1">+ Add New User</a>
-        <a href="/exportExcel"  data-id="'.$row->id.'" class="ont-weight-bold float-right btn btn-secondary m-1"><i class="icon-download mr-2"></i>Export Data </a>
+        <a href="/exportExcel"  class="ont-weight-bold float-right btn btn-secondary m-1"><i class="icon-download mr-2"></i>Export Data </a>
           <h4 class="card-title float-left">Users List</h4>
           <div class="table-responsive pt-3">
           <table class="table table-bordered yajra-datatable">
@@ -59,7 +59,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
         $(function () {
