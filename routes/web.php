@@ -79,8 +79,9 @@ Route::post('/change-new-password', [UserController::class, 'NewPassword']);
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $actionBtn = '<a href="/edit-user/'.$row['id'].'" class="edit btn btn-success btn-sm"  data-id="'.$row->id.'"><i class="icon-cog"></i></a> <a href="/delete-user/'.$row['id'].'"  data-id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="icon-circle-cross"></i></a>
-                        <a href="/view-user/'.$row['id'].'"  data-id="'.$row->id.'" class="delete btn btn-info btn-sm"><i class="icon-file"></i></a>';
+                        $actionBtn = '<a href="/edit-user/'.$row['id'].'" class="edit btn btn-success btn-sm"  data-id="'.$row->id.'"><i class="icon-cog"></i></a> <a href="/delete-user/'.$row['id'].'"  data-id="'.$row->id.'" onclick="return confirm("You Really want to delete this user?") class="delete btn btn-danger btn-sm"><i class="icon-circle-cross"></i></a>
+                        <a href="/view-user/'.$row['id'].'"  data-id="'.$row->id.'" class="delete btn btn-info btn-sm"><i class="icon-file"></i></a>
+                        ';
                         return $actionBtn;
                     })
                     ->rawColumns(['action'])
@@ -89,7 +90,7 @@ Route::post('/change-new-password', [UserController::class, 'NewPassword']);
     })->name('user.index'); 
 });
 
-
+Route::get('/exportExcel',[DashboardController::class,'exportExcel']);
 
 route::get('/testmail',function()
 {

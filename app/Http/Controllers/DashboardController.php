@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Events\TaskEvent;
 use DataTable;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserExport;
+// use Excel;
 
 class DashboardController extends Controller
 {
@@ -183,7 +186,9 @@ class DashboardController extends Controller
      */
     public function deleteUser($id)
     {
-        $qry = $this->user_repo->delete($id);
+        $reg = App::make(UserManagement::class);
+        $qry = $reg->deleteRecord($id);
+        // $qry = $this->user_repo->delete($id);
         return redirect('/user-management1')->with('success', "User Deleted Successfully");
     }
 
@@ -218,4 +223,9 @@ class DashboardController extends Controller
             return view('admin.user.usermanagement1', compact('users'));
         }
     }
+
+    public function exportExcel()
+  {
+    return Excel::download(new UserExport, 'user.xlsx');
+  }
 }

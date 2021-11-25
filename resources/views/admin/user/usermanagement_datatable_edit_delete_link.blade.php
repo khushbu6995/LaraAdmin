@@ -22,7 +22,8 @@
       <div class="card">
   
         <div class="card-body">
-        <a href="/add-user-form" class="btn btn-info font-weight-bold float-right btn-clr-blue">+ Add New User</a>
+        <a href="/add-user-form" class="btn btn-info font-weight-bold float-right btn-clr-blue m-1">+ Add New User</a>
+        <a href="/exportExcel"  data-id="'.$row->id.'" class="ont-weight-bold float-right btn btn-secondary m-1"><i class="icon-download mr-2"></i>Export Data </a>
           <h4 class="card-title float-left">Users List</h4>
           <div class="table-responsive pt-3">
           <table class="table table-bordered yajra-datatable">
@@ -38,6 +39,7 @@
                 <tbody>
                 </tbody>
             </table>
+           
           </div>
         </div>
       </div>

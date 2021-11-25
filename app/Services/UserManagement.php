@@ -78,7 +78,13 @@ class UserManagement
     public function deleteRecord($id)
     {
         try {
+            $qry = $this->user_repo->get($id);
+            $image=$qry->image;
+            $img_path = 'public/admin/profile_image/';
+            File::delete($img_path . $image);
             $this->user_repo->delete($id);
+
+
         } catch (Throwable $t) {
             return view('admin.error.error');
         }
