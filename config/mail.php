@@ -100,7 +100,7 @@ return [
     ],
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'khushbuw.mobio@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'youremail'),
         'name' => env('MAIL_FROM_NAME', 'Laravel Forgot Password'),
     ],
 
